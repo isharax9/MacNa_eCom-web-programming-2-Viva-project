@@ -1,5 +1,6 @@
 package dto;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 
 /**
@@ -8,9 +9,18 @@ import java.io.Serializable;
  */
 
 public class User_DTO implements Serializable{
+    
+    @Expose
     private String first_name;
+    
+    @Expose
     private String last_name;
+    
+    @Expose
     private String email;
+    
+    @Expose(deserialize = true, serialize = false)
+    private String password;
 
     public User_DTO() {
 
@@ -38,6 +48,14 @@ public class User_DTO implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     
