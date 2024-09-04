@@ -101,6 +101,7 @@ public class SignUp extends HttpServlet {
                 session.save(user);
                 session.beginTransaction().commit();
 
+                request.getSession().setAttribute("email", user_DTO.getEmail());
                 response_DTO.setSuccess(true);
                 response_DTO.setContent("Registration Complete. Please Check your email inbox for verification code");
 

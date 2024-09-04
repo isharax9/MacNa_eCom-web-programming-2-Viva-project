@@ -71,8 +71,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                                 <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">Login</a>
-                                    <a href="#" class="dropdown-item">Register</a>
+                                    <a href="sign-in.html" class="dropdown-item">Login</a>
+                                    <a href="sign-up.html" class="dropdown-item">Register</a>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
             <div class="container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item"><a href="#">My Account</a></li>
                     <li class="breadcrumb-item active">Verify-Account</li>
                 </ul>
             </div>
@@ -134,11 +134,13 @@
                 <div class="row">
                     
                     <div class="col-lg-6">
+                        <p class="b2 text-danger" id="msg"></p>
                         <div class="login-form">
                             <div class="row">
+                                
                                 <div class="col-md-6">
                                     <label>Verification code</label>
-                                    <input class="form-control" type="text" placeholder="enter verification code">
+                                    <input class="form-control" type="text" id="verification" placeholder="enter verification code" value="">
                                 </div>
                                 
                                 <div class="col-md-12">
@@ -148,7 +150,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn">Verify-Account</button>
+                                    <button type="button" onclick="verifyAccount()" class="btn">Verify-Account</button>
                                 </div>
                             </div>
                         </div>
@@ -261,6 +263,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/slick/slick.min.js"></script>
+        <script src="js/core.js"></script>
         
         <!-- Template Javascript -->
         <script src="js/main.js"></script>

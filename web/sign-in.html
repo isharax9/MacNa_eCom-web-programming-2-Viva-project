@@ -40,7 +40,7 @@
             </div>
         </div>
         <!-- Top bar End -->
-        
+
         <!-- Nav Bar Start -->
         <div class="nav">
             <div class="container-fluid">
@@ -71,8 +71,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                                 <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">Login</a>
-                                    <a href="#" class="dropdown-item">Register</a>
+                                    <a href="sign-in.html" class="dropdown-item">Login</a>
+                                    <a href="sign-up.html" class="dropdown-item">Register</a>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
             </div>
         </div>
         <!-- Nav Bar End -->      
-        
+
         <!-- Bottom Bar Start -->
         <div class="bottom-bar">
             <div class="container-fluid">
@@ -115,34 +115,35 @@
             </div>
         </div>
         <!-- Bottom Bar End --> 
-        
+
         <!-- Breadcrumb Start -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item"><a href="#">My Account</a></li>
                     <li class="breadcrumb-item active">Sign-In</li>
                 </ul>
             </div>
         </div>
         <!-- Breadcrumb End -->
-        
+
         <!-- Login Start -->
         <div class="login">
             <div class="container-fluid">
                 <div class="row">
                     
                     <div class="col-lg-6">
+                        <p class="b2 text-danger" id="msg"></p>
                         <div class="login-form">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>E-mail</label>
-                                    <input class="form-control" type="text" placeholder="E-mail" name="email">
+                                    <input class="form-control" type="text" placeholder="E-mail" id="email">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Password</label>
-                                    <input class="form-control" type="text" placeholder="Password" name="password">
+                                    <input class="form-control" type="text" placeholder="Password" id="password">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="custom-control custom-checkbox">
@@ -151,7 +152,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn">Submit</button>
+                                    <button type="button" onclick="signIn()" class="btn">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +166,7 @@
             </div>
         </div>
         <!-- Login End -->
-        
+
         <!-- Footer Start -->
         <div class="footer">
             <div class="container-fluid">
@@ -180,7 +181,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
                             <h2>Follow Us</h2>
@@ -218,7 +219,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row payment align-items-center">
                     <div class="col-md-6">
                         <div class="payment-method">
@@ -238,7 +239,7 @@
             </div>
         </div>
         <!-- Footer End -->
-        
+
         <!-- Footer Bottom Start -->
         <div class="footer-bottom">
             <div class="container">
@@ -248,23 +249,24 @@
                     </div>
 
                     <div class="col-md-6 template-by">
-						<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
                         <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Footer Bottom End -->      
-        
+
         <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-        
+
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/slick/slick.min.js"></script>
-        
+        <script src="js/core.js"></script>
+
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
     </body>
