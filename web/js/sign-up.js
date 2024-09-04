@@ -25,10 +25,13 @@ async function signUp() {
     if (response.ok) {
 
         const json = await response.json();
-        console.log(json.success);
-        console.log(json.content);
+        if (json.success) {
+            window.location = "verify-account.html";
+        } else {
+            document.getElementById("msg").innerHTML = json.content;
+        }
     } else {
-        console.log("error");
+        document.getElementById("msg").innerHTML = "Please Try Again";
 
     }
 }

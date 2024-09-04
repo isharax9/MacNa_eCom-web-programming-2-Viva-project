@@ -97,7 +97,7 @@ public class SignUp extends HttpServlet {
 
                 };
 
-                sendMailThread.start();
+//                sendMailThread.start();
                 session.save(user);
                 session.beginTransaction().commit();
 
