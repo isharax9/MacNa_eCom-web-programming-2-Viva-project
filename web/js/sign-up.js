@@ -1,10 +1,9 @@
 async function signUp() {
 
     const user_dto = {
-        NIC:document.getElementById("NIC").value,
+        
         first_name: document.getElementById("first_name").value,
         last_name: document.getElementById("last_name").value,
-        mobile:document.getElementById("mobile").value,
         email: document.getElementById("email").value,
         password: document.getElementById("password").value
     };
@@ -22,4 +21,14 @@ async function signUp() {
                 }
             }
     );
+    
+    if (response.ok) {
+
+        const json = await response.json();
+        console.log(json.success);
+        console.log(json.content);
+    } else {
+        console.log("error");
+
+    }
 }

@@ -5,6 +5,8 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,39 +17,38 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
+
 public class User implements Serializable {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     @Id
-    @Column(name = "NIC",length = 12,nullable = false)
-    private String NIC;
+    private String id;
 
     @Column(name = "first_name",length = 10,nullable = false)
     private String first_name;
 
     @Column(name = "last_name",length = 45,nullable = false)
     private String last_name;
-    
-    @Column(name = "mobile",length = 10,nullable = false)
-    private String mobile;
-    
+            
     @Column(name = "email",length = 50,nullable = false)
     private String email;
     
-    @Column(name = "password",length = 45,nullable = false)
+    @Column(name = "password",length = 15,nullable = false)
     private String password;
     
-    @Column(name = "verification_code",length = 20,nullable = false)
+    @Column(name = "verification_code",length = 10,nullable = false)
     private String verification_code;
 
     public User(){
     }
 
-    public String getNIC() {
-        return NIC;
+    public String getid() {
+        return id;
     }
 
-    public void setNIC(String NIC) {
-        this.NIC = NIC;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public String getFirst_name() {
@@ -64,14 +65,6 @@ public class User implements Serializable {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
     public String getEmail() {
