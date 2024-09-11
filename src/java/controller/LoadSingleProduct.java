@@ -57,8 +57,8 @@ public class LoadSingleProduct extends HttpServlet {
                 }
 
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("product", gson.toJson(product));
-                jsonObject.addProperty("productList", gson.toJson(productList));
+                jsonObject.add("product", gson.toJsonTree(product));
+                jsonObject.add("productList", gson.toJsonTree(productList));
 
                 response.setContentType("application/json");
                 response.getWriter().write(gson.toJson(jsonObject));

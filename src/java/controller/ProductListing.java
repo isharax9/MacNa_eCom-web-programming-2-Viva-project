@@ -158,24 +158,23 @@ public class ProductListing extends HttpServlet {
                                     session.beginTransaction().commit();
 
                                     // Define a permanent path outside the project build directory (e.g., C:\ProductImages)
-                                    String imagesPath = "C:\\netbeans16\\macna_ee7\\ProductImages\\" + pid;
+                                    String applicationPath = request.getServletContext().getRealPath("");
+                                    String newApplicationPath = applicationPath.replace("build"+File.separator+"web", "web");
 
                                     // Create folder if it doesn't exist
-                                    File folder = new File(imagesPath);
-                                    if (!folder.exists()) {
-                                        folder.mkdirs();
-                                    }
+                                    File folder = new File(newApplicationPath + "//product-images//" + pid);
+                                    folder.mkdir();
 
                                     // Save images to the permanent folder
-                                    File file1 = new File(folder, pid + "image1.png");
+                                    File file1 = new File(folder,"image1.png");
                                     InputStream inputStream1 = image1.getInputStream();
                                     Files.copy(inputStream1, file1.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                                    File file2 = new File(folder, pid + "image2.png");
+                                    File file2 = new File(folder,"image2.png");
                                     InputStream inputStream2 = image2.getInputStream();
                                     Files.copy(inputStream2, file2.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                                    File file3 = new File(folder, pid + "image3.png");
+                                    File file3 = new File(folder,"image3.png");
                                     InputStream inputStream3 = image3.getInputStream();
                                     Files.copy(inputStream3, file3.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
