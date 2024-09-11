@@ -116,17 +116,10 @@
         dots: false,
         fade: true,
         slidesToShow: 1,
-        slidesToScroll: 1,
-        asNavFor: '.product-slider-single-nav'
+        slidesToScroll: 1
+        
     });
-    $('.product-slider-single-nav').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        dots: false,
-        centerMode: true,
-        focusOnSelect: true,
-        asNavFor: '.product-slider-single'
-    });
+    
     
     
     // Brand Slider
