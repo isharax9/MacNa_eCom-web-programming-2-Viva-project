@@ -11,7 +11,11 @@ import entity.Product_Condition;
 import entity.Product_Status;
 import entity.Storage;
 import entity.User;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -150,14 +154,34 @@ public class ProductListing extends HttpServlet {
                                     product.setUser(user);
 
                                     // Save the product
-                                    session.save(product);
+                                    int pid = (int) session.save(product);
                                     session.beginTransaction().commit();
-                                    
-                                    
+
+                                    // Define a permanent path outside the project build directory (e.g., C:\ProductImages)
+                                    String imagesPath = "C:\\netbeans16\\macna_ee7\\ProductImages\\" + pid;
+
+                                    // Create folder if it doesn't exist
+                                    File folder = new File(imagesPath);
+                                    if (!folder.exists()) {
+                                        folder.mkdirs();
+                                    }
+
+                                    // Save images to the permanent folder
+                                    File file1 = new File(folder, pid + "image1.png");
+                                    InputStream inputStream1 = image1.getInputStream();
+                                    Files.copy(inputStream1, file1.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                                    File file2 = new File(folder, pid + "image2.png");
+                                    InputStream inputStream2 = image2.getInputStream();
+                                    Files.copy(inputStream2, file2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                                    File file3 = new File(folder, pid + "image3.png");
+                                    InputStream inputStream3 = image3.getInputStream();
+                                    Files.copy(inputStream3, file3.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                                    // Send success response
                                     response_DTO.setSuccess(true);
                                     response_DTO.setContent("new product added");
-                                    
-                                    
                                 }
                             }
                         }
@@ -169,7 +193,7 @@ public class ProductListing extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().write(gson.toJson(response_DTO));
         System.out.println(gson.toJson(response_DTO));
-        
+
         session.close();
     }
 
