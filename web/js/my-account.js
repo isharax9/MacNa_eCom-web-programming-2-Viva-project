@@ -94,6 +94,7 @@ async function productListing() {
             // Handle successful response
         } else {
             // Handle unsuccessful response
+            console.log(json.content);
         }
     } else {
         document.getElementById("message").innerHTML = "Please try again later!";

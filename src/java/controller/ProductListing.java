@@ -1,8 +1,8 @@
 package controller;
 
+import com.google.gson.Gson;
 import dto.Response_DTO;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +20,8 @@ public class ProductListing extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Gson gson = new Gson();
 
         Response_DTO response_DTO = new Response_DTO();
 
@@ -44,17 +46,27 @@ public class ProductListing extends HttpServlet {
 
         } else if (description.isEmpty()) {
             response_DTO.setContent("please fill the description");
-            
+
         } else if (price.isEmpty()) {
             response_DTO.setContent("please fill the price");
         } else if (!Validation.isDouble(price)) {
             response_DTO.setContent("invalid price");
+        } else if (Double.parseDouble(price) <= 0) {
+            response_DTO.setContent("Invalid price");
 
         } else if (quantity.isEmpty()) {
             response_DTO.setContent("please fill the quantity");
         } else if (!Validation.isInteger(quantity)) {
             response_DTO.setContent("Invalid quantity");
-        }
-    
-}}
+        } else if (Integer.parseInt(quantity) <= 0) {
+            response_DTO.setContent("Invalid Quantity");
 
+        } else {
+        }
+
+        response.setContentType("application/json");
+        response.getWriter().write(gson.toJson(response_DTO));
+        System.out.println(gson.toJson(response_DTO));
+    }
+
+}
