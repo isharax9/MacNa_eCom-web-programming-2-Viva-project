@@ -50,7 +50,7 @@ public class SignIn extends HttpServlet {
             if (!criteria1.list().isEmpty()) {
                 User user = (User) criteria1.list().get(0);
 
-                if (!user.getVerification_code().equals("verified")) {
+                if (!user.getVerification().equals("verified")) {
                     
                     //not verified
 

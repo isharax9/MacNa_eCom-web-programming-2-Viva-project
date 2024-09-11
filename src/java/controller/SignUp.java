@@ -82,7 +82,7 @@ public class SignUp extends HttpServlet {
                 user.setLast_name(user_DTO.getLast_name());
                 user.setEmail(user_DTO.getEmail());
                 user.setPassword(user_DTO.getPassword());
-                user.setVerification_code(String.valueOf(code));
+                user.setVerification(String.valueOf(code));
 
                 session.save(user);
 
@@ -92,7 +92,7 @@ public class SignUp extends HttpServlet {
                     @Override
                     public void run() {
                         Mail.sendMail(user.getEmail(), "MacNa eCom Verification",
-                                "<h2 style=\"color:#0d6efd;\">Your Verification Code: " + user.getVerification_code() + "</h2>");
+                                "<h2 style=\"color:#0d6efd;\">Your Verification Code: " + user.getVerification() + "</h2>");
                     }
 
                 };

@@ -1,6 +1,4 @@
-
 package entity;
-
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -10,44 +8,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author isharaLakshitha
- */
 
 @Entity
 @Table(name = "user")
-
 public class User implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     @Id
-    private String id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @Column(name = "first_name",length = 10,nullable = false)
+    @Column(name = "first_name",length = 45,nullable = false)
     private String first_name;
 
     @Column(name = "last_name",length = 45,nullable = false)
     private String last_name;
-            
-    @Column(name = "email",length = 50,nullable = false)
+    
+    @Column(name = "email",length = 45,nullable = false)
     private String email;
     
-    @Column(name = "password",length = 15,nullable = false)
+    @Column(name = "password",length = 45,nullable = false)
     private String password;
     
-    @Column(name = "verification_code",length = 10,nullable = false)
-    private String verification_code;
+    @Column(name = "verification",length = 10,nullable = false)
+    private String verification;
 
     public User(){
+        
     }
 
-    public String getid() {
+    public int getId() {
         return id;
     }
 
-    public void setid(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -83,11 +77,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getVerification_code() {
-        return verification_code;
+    public String getVerification() {
+        return verification;
     }
 
-    public void setVerification_code(String verification_code) {
-        this.verification_code = verification_code;
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
+    
 }

@@ -3,13 +3,8 @@ package dto;
 import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 
-/**
- *
- * @author isharaLakshitha
- */
 public class User_DTO implements Serializable {
 
-    
     @Expose
     private String first_name;
 
@@ -52,7 +47,6 @@ public class User_DTO implements Serializable {
         this.email = email;
     }
 
-   
     public String getPassword() {
         return password;
     }

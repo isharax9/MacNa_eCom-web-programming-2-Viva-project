@@ -39,11 +39,11 @@ public class Verification extends HttpServlet {
             Session session = HibernateUtil.getSessionFactory().openSession();
             Criteria criteria1 = session.createCriteria(User.class);
             criteria1.add(Restrictions.eq("email", email));
-            criteria1.add(Restrictions.eq("verification_code", verification));
+            criteria1.add(Restrictions.eq("verification", verification));
 
             if (!criteria1.list().isEmpty()) {
                 User user = (User) criteria1.list().get(0);
-                user.setVerification_code("verified");
+                user.setVerification("verified");
 
                 session.update(user);
                 session.beginTransaction().commit();
