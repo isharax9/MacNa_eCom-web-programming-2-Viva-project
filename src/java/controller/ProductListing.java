@@ -2,12 +2,17 @@ package controller;
 
 import com.google.gson.Gson;
 import dto.Response_DTO;
+import dto.User_DTO;
 import entity.Category;
 import entity.Color;
 import entity.Model;
-import entity.ProductCondition;
+import entity.Product;
+import entity.Product_Condition;
+import entity.Product_Status;
 import entity.Storage;
+import entity.User;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.HibernateUtil;
 import model.Validation;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 @MultipartConfig
 @WebServlet(name = "ProductListing", urlPatterns = {"/ProductListing"})
@@ -108,23 +115,62 @@ public class ProductListing extends HttpServlet {
                             if (color == null) {
                                 response_DTO.setContent("Please select a valid Color");
                             } else {
-                                ProductCondition condition = (ProductCondition) session.get(ProductCondition.class, Integer.parseInt(conditionId));
+                                Product_Condition condition = (Product_Condition) session.get(Product_Condition.class, Integer.parseInt(conditionId));
 
                                 if (condition == null) {
                                     response_DTO.setContent("Please select a valid Condition");
                                 } else {
                                     // All validations passed, continue with other processing
+
+                                    Product product = new Product();
+                                    product.setColor(color);
+
+                                    product.setDate_time(new Date());
+                                    product.setDescription(description);
+
+                                    product.setModel(model);
+                                    product.setPrice(Double.parseDouble(price));
+
+                                    // Get Active status
+                                    Product_Status product_Status = (Product_Status) session.load(Product_Status.class, 1); // Assuming Active status has ID 1
+                                    product.setProduct_Status(product_Status);
+
+                                    product.setProduct_condition(condition);
+                                    product.setQty(Integer.parseInt(quantity));
+
+                                    product.setStorage(storage);
+                                    product.setTitle(title);
+
+                                    // Get user
+                                    User_DTO user_DTO = (User_DTO) request.getSession().getAttribute("user");
+                                    Criteria criteria = session.createCriteria(User.class);
+                                    criteria.add(Restrictions.eq("email", user_DTO.getEmail()));
+                                    User user = (User) criteria.uniqueResult();
+
+                                    product.setUser(user);
+
+                                    // Save the product
+                                    session.save(product);
+                                    session.beginTransaction().commit();
+                                    
+                                    
+                                    response_DTO.setSuccess(true);
+                                    response_DTO.setContent("new product added");
+                                    
+                                    
                                 }
                             }
                         }
                     }
-                } 
+                }
             }
         }
 
         response.setContentType("application/json");
         response.getWriter().write(gson.toJson(response_DTO));
         System.out.println(gson.toJson(response_DTO));
+        
+        session.close();
     }
 
 }

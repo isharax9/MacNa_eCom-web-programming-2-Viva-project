@@ -9,21 +9,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "product_condition")
-public class ProductCondition implements Serializable{
+@Table(name = "product_status")
+public class Product_Status implements Serializable {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(name = "name",length = 45,nullable = false)
+
+    @Column(name = "name", length = 45, nullable = false)
     private String name;
 
-    public ProductCondition(){
-        
+    public Product_Status() {
+
     }
-    
+
     public int getId() {
         return id;
     }
@@ -39,4 +39,5 @@ public class ProductCondition implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
 }

@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import dto.Response_DTO;
 import entity.Category;
 import entity.Color;
-import entity.ProductCondition;
+import entity.Product_Condition;
 import entity.Model;
 import entity.Storage;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class LoadFeactures extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("OK");
+//        System.out.println("OK");
 
         Response_DTO response_DTO = new Response_DTO();
 
@@ -49,9 +49,9 @@ public class LoadFeactures extends HttpServlet {
         criteria4.addOrder(Order.asc("id"));
         List<Storage> storageList = criteria4.list();
 
-        Criteria criteria5 = session.createCriteria(ProductCondition.class);
+        Criteria criteria5 = session.createCriteria(Product_Condition.class);
         criteria4.addOrder(Order.asc("name"));
-        List<ProductCondition> conditionList = criteria5.list();
+        List<Product_Condition> conditionList = criteria5.list();
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("categoryList", gson.toJsonTree(categoryList));

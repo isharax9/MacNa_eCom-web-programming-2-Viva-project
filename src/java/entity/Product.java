@@ -22,8 +22,8 @@ public class Product implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "condition_id")
-    private ProductCondition product_condition;
+    @JoinColumn(name = "product_condition_id")
+    private Product_Condition product_condition;
 
     @ManyToOne
     @JoinColumn(name = "model_id")
@@ -59,7 +59,7 @@ public class Product implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_status_id")
-    private ProductStatus product_Status;
+    private Product_Status product_Status;
 
     public Product() {
 
@@ -73,11 +73,11 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public ProductCondition getProduct_condition() {
+    public Product_Condition getProduct_condition() {
         return product_condition;
     }
 
-    public void setProduct_condition(ProductCondition product_condition) {
+    public void setProduct_condition(Product_Condition product_condition) {
         this.product_condition = product_condition;
     }
 
@@ -153,11 +153,11 @@ public class Product implements Serializable {
         this.date_time = date_time;
     }
 
-    public ProductStatus getProduct_Status() {
+    public Product_Status getProduct_Status() {
         return product_Status;
     }
 
-    public void setProduct_Status(ProductStatus product_Status) {
+    public void setProduct_Status(Product_Status product_Status) {
         this.product_Status = product_Status;
     }
 }
