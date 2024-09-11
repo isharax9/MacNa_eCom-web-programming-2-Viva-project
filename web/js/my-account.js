@@ -11,27 +11,29 @@ async function loadFeatures() {
             );
     if (response.ok) {
         const json = await response.json();
+        
         const categoryList = json.categoryList;
         modelList = json.modelList; //model list eka global karaa.
         const colorList = json.colorList;
         const storageList = json.storageList;
         const conditionList = json.conditionList;
-        loadSelect("categorySelect", categoryList, "name");
-        loadSelect("modelSelect", modelList, "name");
-        loadSelect("storageSelect", storageList, "value");
-        loadSelect("colorSelect", colorList, "name");
-        loadSelect("conditionSelect", conditionList, "name");
+        
+        loadSelect("categorySelect", categoryList, ["id","name"]);
+        loadSelect("modelSelect", modelList, ["id","name"]);
+        loadSelect("storageSelect", storageList, ["id","value"]);
+        loadSelect("colorSelect", colorList,["id","name"] );
+        loadSelect("conditionSelect", conditionList,["id","name"] );
     } else {
         document.getElementById("message").innerHTML = "Please try again later!";
     }
 }
 
-function loadSelect(selectTagId, list, property) {
+function loadSelect(selectTagId, list, propertyArray) {
     const SelectTag = document.getElementById(selectTagId);
     list.forEach(item => {
         let optionTag = document.createElement("option");
-        optionTag.value = item.id;
-        optionTag.innerHTML = item[property];
+        optionTag.value = item[propertyArray[0]];
+        optionTag.innerHTML = item[propertyArray[1]];
         SelectTag.appendChild(optionTag);
     });
 }
@@ -41,7 +43,7 @@ function updateModels() {
     modelSelectTag.length = 1;
     let selectedCategoryId = document.getElementById("categorySelect").value;
     modelList.forEach(model => {
-        if (model.category.id === selectedCategoryId) {
+        if (model.category.id == selectedCategoryId) { // LOL found the bug here.. don't ever use eqaul for === , instead of that use only ==
             let optionTag = document.createElement("option");
             optionTag.value = model.id;
             optionTag.innerHTML = model.name;

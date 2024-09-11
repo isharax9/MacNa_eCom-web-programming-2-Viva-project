@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.HibernateUtil;
+import model.Validation;
 import org.hibernate.Session;
 
 @MultipartConfig
@@ -43,12 +44,17 @@ public class ProductListing extends HttpServlet {
 
         } else if (description.isEmpty()) {
             response_DTO.setContent("please fill the description");
+            
         } else if (price.isEmpty()) {
             response_DTO.setContent("please fill the price");
-        } else if (description.isEmpty()) {
-            response_DTO.setContent("please fill the description");
+        } else if (!Validation.isDouble(price)) {
+            response_DTO.setContent("invalid price");
 
+        } else if (quantity.isEmpty()) {
+            response_DTO.setContent("please fill the quantity");
+        } else if (!Validation.isInteger(quantity)) {
+            response_DTO.setContent("Invalid quantity");
         }
+    
+}}
 
-    }
-}
