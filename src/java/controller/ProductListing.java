@@ -2,6 +2,11 @@ package controller;
 
 import com.google.gson.Gson;
 import dto.Response_DTO;
+import entity.Category;
+import entity.Color;
+import entity.Model;
+import entity.ProductCondition;
+import entity.Storage;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -41,7 +46,18 @@ public class ProductListing extends HttpServlet {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        if (title.isEmpty()) {
+        if (!Validation.isInteger(categoryId)) {
+            response_DTO.setContent("Invalid Category");
+        } else if (!Validation.isInteger(modelId)) {
+            response_DTO.setContent("Invalid Model");
+        } else if (!Validation.isInteger(storageId)) {
+            response_DTO.setContent("Invalid Storage");
+        } else if (!Validation.isInteger(colorId)) {
+            response_DTO.setContent("Invalid Color");
+        } else if (!Validation.isInteger(conditionId)) {
+            response_DTO.setContent("Invalid Condition");
+
+        } else if (title.isEmpty()) {
             response_DTO.setContent("please fill product title");
 
         } else if (description.isEmpty()) {
@@ -61,7 +77,49 @@ public class ProductListing extends HttpServlet {
         } else if (Integer.parseInt(quantity) <= 0) {
             response_DTO.setContent("Invalid Quantity");
 
+        } else if (image1.getSubmittedFileName() == null) {
+            response_DTO.setContent("Please upload Image 1");
+        } else if (image2.getSubmittedFileName() == null) {
+            response_DTO.setContent("Please upload Image 2");
+        } else if (image3.getSubmittedFileName() == null) {
+            response_DTO.setContent("Please upload Image 3");
+
         } else {
+            Category category = (Category) session.get(Category.class, Integer.parseInt(categoryId));
+
+            if (category == null) {
+                response_DTO.setContent("Please select a valid Category");
+            } else {
+                Model model = (Model) session.get(Model.class, Integer.parseInt(modelId));
+
+                if (model == null) {
+                    response_DTO.setContent("Please select a valid Model");
+                } else {
+                    if (model.getCategory().getId() != category.getId()) {
+                        response_DTO.setContent("Please select a valid Model");
+                    } else {
+                        Storage storage = (Storage) session.get(Storage.class, Integer.parseInt(storageId));
+
+                        if (storage == null) {
+                            response_DTO.setContent("Please select a valid Storage");
+                        } else {
+                            Color color = (Color) session.get(Color.class, Integer.parseInt(colorId));
+
+                            if (color == null) {
+                                response_DTO.setContent("Please select a valid Color");
+                            } else {
+                                ProductCondition condition = (ProductCondition) session.get(ProductCondition.class, Integer.parseInt(conditionId));
+
+                                if (condition == null) {
+                                    response_DTO.setContent("Please select a valid Condition");
+                                } else {
+                                    // All validations passed, continue with other processing
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
         }
 
         response.setContentType("application/json");
