@@ -69,6 +69,64 @@ async function loadProduct() {
 
             document.getElementById("product-storage").innerHTML = json.product.storage.value;
             document.getElementById("product-description").innerHTML = json.product.description;
+            
+                        
+            let productHtml = document.getElementById("similer-product");
+            json.productList.forEach(item => {
+
+
+                console.log(item.model);
+
+                let productCloneHtml = productHtml.cloneNode(true);
+
+                // Update product image
+                productCloneHtml.querySelector("#similer-product-image").src = "product-images/" + item.id + "/image1.png";
+
+                // Update the product link
+                productCloneHtml.querySelector("#similer-product-a1").href = "product-details.html?id=" + item.id;
+                productCloneHtml.querySelector("#similer-product-a2").href = "product-details.html?id=" + item.id;
+
+                // Update product title
+                productCloneHtml.querySelector("#similer-product-title").innerText = item.name;
+
+                
+
+                // Update product price
+                productCloneHtml.querySelector("#similer-product-price").innerText = "Rs. " + item.price;
+
+                
+
+                // Append the cloned product to the main product list
+                document.getElementById("similer-product-main").appendChild(productCloneHtml);
+            });
+// Product Slider 3 Column
+    $('.product-slider-3').slick({
+        autoplay: true,
+        infinite: true,
+        dots: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                }
+            },
+        ]
+    });
 
 
         } else {
