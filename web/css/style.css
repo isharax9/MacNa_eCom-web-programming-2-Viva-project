@@ -732,7 +732,7 @@ h2 {
 
 .product-item .product-content .price span {
     margin-left: 12px;
-    text-decoration: line-through;
+    text-decoration:none;
     font-weight: 700;
     color: #999999;
 }
@@ -1155,7 +1155,7 @@ h2 {
 
 .product-detail .product-content .price span {
     color: #999999;
-    text-decoration: line-through;
+    text-decoration: none;
     margin-left: 12px;
 }
 
