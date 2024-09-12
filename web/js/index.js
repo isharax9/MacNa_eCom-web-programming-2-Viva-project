@@ -34,6 +34,15 @@ async function checkSignIn() {
 
             // Append the new <li> to the list
             st_quick_link.appendChild(new_li_tag1);
+            
+            
+            let st_button_1 = document.getElementById("st-button-1");
+            st_button_1.href = "SignOut";
+            st_button_1.innerHTML = "Sign Out";
+
+            let st_div_1 = document.getElementById("st-div-1");
+            st_div_1.remove();
+
 
         } else {
             // User is not signed in
