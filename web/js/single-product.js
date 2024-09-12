@@ -22,7 +22,7 @@ async function loadProduct() {
             document.getElementById("thum2").src = imagePathBase + "/image2.png";
             document.getElementById("thum3").src = imagePathBase + "/image3.png";
 
-           
+
             document.getElementById("product-title").innerHTML = json.product.title;
             document.getElementById("product-published-on").innerHTML = json.product.date_time;
 
@@ -57,17 +57,19 @@ async function loadProduct() {
 //            }
 //            );
 
-
+            let productHtml = document.getElementById("similer-product");
+            document.getElementById("smiler-product-main").innerHTML = "";
 
             json.productList.forEach(item => {
-                let ProductHtml = document.getElementById("similer-product");
-                let productCloneHtml = ProductHtml.cloneNode(true);
+
+                let productCloneHtml = productHtml.cloneNode(true);
+
 
                 productCloneHtml.querySelector("#similer-product-a1").href = "single-product.html?id=" + item.id;
                 productCloneHtml.querySelector("#similer-product-image").src = "product-images/" + item.id + "/image1.png";
                 productCloneHtml.querySelector("#similer-product-a2").href = "single-product.html?id=" + item.id;
                 productCloneHtml.querySelector("#similer-product-title").innerHTML = item.title;
-                
+
                 productCloneHtml.querySelector("#similer-product-price").innerHTML = "Rs. " + new Intl.NumberFormat(
                         "en-US",
                         {
@@ -91,33 +93,33 @@ async function loadProduct() {
 //
 //            });
 // Product Slider 3 Column
-    $('.product-slider-3').slick({
-        autoplay: true,
-        infinite: true,
-        dots: false,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                }
-            },
-        ]
-    });
+            $('.product-slider-3').slick({
+                autoplay: true,
+                infinite: true,
+                dots: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1,
+                        }
+                    },
+                ]
+            });
 
 
         } else {
