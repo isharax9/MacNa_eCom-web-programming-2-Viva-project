@@ -60,7 +60,7 @@ public class AddToCart extends HttpServlet {
                     response_DTO.setContent("qty must be greater than 0");
 
                 } else {
-                    Product product = (Product) session.load(Product.class, productId);
+                    Product product = (Product) session.get(Product.class, productId);
 
                     if (product != null) {
                         //product found
@@ -187,8 +187,8 @@ public class AddToCart extends HttpServlet {
                                     ArrayList<Cart_DTO> sessionCart = new ArrayList<>();
 
                                     Cart_DTO cart_DTO = new Cart_DTO();
-                                    cart_DTO.setProduct(null);
-                                    cart_DTO.setQty(0);
+                                    cart_DTO.setProduct(product);
+                                    cart_DTO.setQty(productQty);
                                     sessionCart.add(cart_DTO);
 
                                     httpSession.setAttribute("sessionCart", sessionCart);
