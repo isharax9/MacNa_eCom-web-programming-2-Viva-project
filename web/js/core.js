@@ -67,7 +67,7 @@ async function signIn() {
 
 
             if (json.content === "Not Verified") {
-                window.location = "verify-account.html"
+                window.location = "verify-account.html";
             } else {
                 document.getElementById("msg").innerHTML = json.content;
             }
