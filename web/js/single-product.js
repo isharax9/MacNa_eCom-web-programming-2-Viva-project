@@ -1,3 +1,6 @@
+
+/* global productCloneHtml, item */
+
 async function loadProduct() {
     const parameters = new URLSearchParams(window.location.search);
 
@@ -14,12 +17,12 @@ async function loadProduct() {
             const imagePathBase = "product-images/" + id;
 
 
-
             // Update thumanil src
             document.getElementById("thum1").src = imagePathBase + "/image1.png";
             document.getElementById("thum2").src = imagePathBase + "/image2.png";
             document.getElementById("thum3").src = imagePathBase + "/image3.png";
 
+           
             document.getElementById("product-title").innerHTML = json.product.title;
             document.getElementById("product-published-on").innerHTML = json.product.date_time;
 
@@ -35,63 +38,58 @@ async function loadProduct() {
             document.getElementById("product-condition").innerHTML = json.product.product_condition.name;
             document.getElementById("product-qty").innerHTML = json.product.qty;
 
-            document.getElementById("product-color").innerHTML = json.product.color.name;
+//            document.getElementById("color-border").style.borderColor = json.product.color.name;
+//            document.getElementById("color-background").style.backgroundColor = json.product.color.name;
 
+            document.getElementById("product-color").innerHTML = json.product.color.name;
             document.getElementById("product-storage").innerHTML = json.product.storage.value;
             document.getElementById("product-description").innerHTML = json.product.description;
-            
-            document.getElementById("add-to-cart-main").addEventListener(
-                    "click",
-                    (e) => {
-                addToCart(
-                        json.product.id,
-                        document.getElementById("add-to-cart-qty").value
-                        );
 
-                e.preventDefault();
-            }
-            );
-                        
-            let productHtml = document.getElementById("similer-product");
+//            document.getElementById("add-to-cart-main").addEventListener(
+//                    "click",
+//                    (e) => {
+//                addToCart(
+//                        json.product.id,
+//                        document.getElementById("add-to-cart-qty").value
+//                        );
+//
+//                e.preventDefault();
+//            }
+//            );
+
+
+
             json.productList.forEach(item => {
+                let ProductHtml = document.getElementById("similer-product");
+                let productCloneHtml = ProductHtml.cloneNode(true);
 
-
-                console.log(item.model);
-
-                let productCloneHtml = productHtml.cloneNode(true);
-
-                // Update product image
+                productCloneHtml.querySelector("#similer-product-a1").href = "single-product.html?id=" + item.id;
                 productCloneHtml.querySelector("#similer-product-image").src = "product-images/" + item.id + "/image1.png";
-
-                // Update the product link
-                productCloneHtml.querySelector("#similer-product-a1").href = "product-details.html?id=" + item.id;
-                productCloneHtml.querySelector("#similer-product-a2").href = "product-details.html?id=" + item.id;
-
-                // Update product title
-                productCloneHtml.querySelector("#similer-product-title").innerText = item.name;
-
+                productCloneHtml.querySelector("#similer-product-a2").href = "single-product.html?id=" + item.id;
+                productCloneHtml.querySelector("#similer-product-title").innerHTML = item.title;
                 
+                productCloneHtml.querySelector("#similer-product-price").innerHTML = "Rs. " + new Intl.NumberFormat(
+                        "en-US",
+                        {
+                            minimumFractionDigits: 2
+                        }
+                ).format(item.price);
 
-                // Update product price
-                productCloneHtml.querySelector("#similer-product-price").innerText = "Rs. " + item.price;
 
-                
-
-                // Append the cloned product to the main product list
-                document.getElementById("similer-product-main").appendChild(productCloneHtml);
-                
-                
-                productCloneHtml.querySelector("#similer-product-add-to-cart").addEventListener(
-                        "click",
-                        (e) => {
-                    addToCart(item.id);
-                    e.preventDefault();
-                }
-                );
-
-                
-                
+                document.getElementById("smiler-product-main").appendChild(productCloneHtml);
             });
+
+
+//            productCloneHtml.querySelector("#similer-product-add-to-cart").addEventListener(
+//                    "click",
+//                    (e) => {
+//                addToCart(item.id);
+//                e.preventDefault();
+//            }
+//            );
+//
+//
+//            });
 // Product Slider 3 Column
     $('.product-slider-3').slick({
         autoplay: true,
@@ -129,7 +127,6 @@ async function loadProduct() {
         window.location = "index.html";
     }
 }
-
 
 
 //async function addToCart(id, qty) {
