@@ -16,5 +16,8 @@ public class AddToCart extends HttpServlet {
         String id = request.getParameter("id");
         String qty = request.getParameter("qty");
 
+        System.out.println(id);
+        System.out.println(qty);
+
     }
 }

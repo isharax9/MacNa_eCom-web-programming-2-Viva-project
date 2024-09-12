@@ -22,7 +22,7 @@ async function loadProduct() {
             document.getElementById("thum2").src = imagePathBase + "/image2.png";
             document.getElementById("thum3").src = imagePathBase + "/image3.png";
 
-
+            //start of added main single product details to front-end
             document.getElementById("product-title").innerHTML = json.product.title;
             document.getElementById("product-published-on").innerHTML = json.product.date_time;
 
@@ -45,17 +45,23 @@ async function loadProduct() {
             document.getElementById("product-storage").innerHTML = json.product.storage.value;
             document.getElementById("product-description").innerHTML = json.product.description;
 
-//            document.getElementById("add-to-cart-main").addEventListener(
-//                    "click",
-//                    (e) => {
-//                addToCart(
-//                        json.product.id,
-//                        document.getElementById("add-to-cart-qty").value
-//                        );
-//
-//                e.preventDefault();
-//            }
-//            );
+            document.getElementById("add-to-cart-main").addEventListener(
+                    "click",
+                    (e) => {
+                addToCart(
+                        json.product.id,
+                        document.getElementById("add-to-cart-qty").value
+                        );
+
+                e.preventDefault();
+            }
+            );
+
+            //end of added main single product details to front-end
+
+
+            //Start of the similer product cloning thing
+
 
             let productHtml = document.getElementById("similer-product");
             document.getElementById("smiler-product-main").innerHTML = "";
@@ -79,22 +85,11 @@ async function loadProduct() {
                         }
                 ).format(item.price);
 
-
                 document.getElementById("smiler-product-main").appendChild(productCloneHtml);
             });
 
 
-//            productCloneHtml.querySelector("#similer-product-add-to-cart").addEventListener(
-//                    "click",
-//                    (e) => {
-//                addToCart(item.id);
-//                e.preventDefault();
-//            }
-//            );
-//
-//
-//            });
-// Product Slider 3 Column
+            // Product Slider 3 Column
             $('.product-slider-3').slick({
                 autoplay: true,
                 infinite: true,
@@ -132,17 +127,20 @@ async function loadProduct() {
     }
 }
 
+/*End Load Product function*/
 
-//async function addToCart(id, qty) {
-//
-//    console.log("add to cart: " + id);
-//    const response = await fetch(
-//            "AddToCart?id=" + id + "&qty=" + qty
-//            );
-//
-//    if (response.ok) {
-//        const json = await response.json();
-//    } else {
-//        // Handle error
-//    }
-//}
+
+async function addToCart(id, qty) {
+
+    console.log("add to cart id: " + id);
+    console.log("add to cart qty: " + qty);
+    const response = await fetch(
+            "AddToCart?id=" + id + "&qty=" + qty
+            );
+
+    if (response.ok) {
+
+    } else {
+        // Handle error
+    }
+}
