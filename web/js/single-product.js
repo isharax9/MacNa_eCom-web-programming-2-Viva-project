@@ -48,7 +48,7 @@ async function loadProduct() {
             document.getElementById("add-to-cart-main").addEventListener(
                     "click",
                     (e) => {
-                addToCart(json.product.id, document.getElementById("add-to-cart-qty").value);
+                addToCart(json.product.id,document.getElementById("add-to-cart-qty").value);
                 e.preventDefault();
             }
             );
@@ -134,9 +134,23 @@ async function addToCart(id, qty) {
             "AddToCart?id=" + id + "&qty=" + qty
             );
 
+const popup = Notification();
+
     if (response.ok) {
         const json = await response.json();
+
+        if (json.success) {
+            popup.success({
+                message: json.content
+            });
+        } else {
+            popup.error({
+                message: json.content
+            });
+        }
     } else {
-        // Handle error
+        popup.error({
+            message: "Unable to process your request"
+        });
     }
 }

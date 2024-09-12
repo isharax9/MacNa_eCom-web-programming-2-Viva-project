@@ -29,10 +29,8 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Response_DTO response_DTO = new Response_DTO();
-        
-        
-        Gson gson  = new Gson();
-        
+
+        Gson gson = new Gson();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -114,6 +112,9 @@ public class AddToCart extends HttpServlet {
                                     session.update(cartItem);
                                     transaction.commit();
 
+                                    response_DTO.setSuccess(true);
+                                    response_DTO.setContent("Cart item updated");
+
                                 } else {
                                     //can't update your cart.quantity not available.
                                     response_DTO.setContent("can't update your cart.quantity not available.");
@@ -150,7 +151,7 @@ public class AddToCart extends HttpServlet {
                                         foundCart_DTO.setQty(foundCart_DTO.getQty() + productQty);
 
                                         response_DTO.setSuccess(true);
-                                        response_DTO.setContent("Product Added to the cart");
+                                        response_DTO.setContent("Cart item updated");
 
                                     } else {
                                         //quantity not available
@@ -191,6 +192,10 @@ public class AddToCart extends HttpServlet {
                                     sessionCart.add(cart_DTO);
 
                                     httpSession.setAttribute("sessionCart", sessionCart);
+                                    
+                                    response_DTO.setSuccess(true);
+                                    response_DTO.setContent("Product added to the cart");
+                                    
                                 } else {
                                     //quantity not available
                                     response_DTO.setContent("quantity not available");
@@ -207,10 +212,11 @@ public class AddToCart extends HttpServlet {
             // handle the exception
             e.printStackTrace();
             System.err.println("An error occurred: " + e.getMessage());
-            
+
         }
-        
+
         response.setContentType("application/json");
         response.getWriter().write(gson.toJson(response_DTO));
+        session.close();
     }
 }
