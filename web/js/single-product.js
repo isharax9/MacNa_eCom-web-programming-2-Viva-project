@@ -48,7 +48,7 @@ async function loadProduct() {
             document.getElementById("add-to-cart-main").addEventListener(
                     "click",
                     (e) => {
-                addToCart(json.product.id,document.getElementById("add-to-cart-qty").value);
+                addToCart(json.product.id, document.getElementById("add-to-cart-qty").value);
                 e.preventDefault();
             }
             );
@@ -80,6 +80,13 @@ async function loadProduct() {
                             minimumFractionDigits: 2
                         }
                 ).format(item.price);
+
+                productCloneHtml.querySelector("#similer-product-add-to-cart").addEventListener(
+                        "click",
+                        (e) => {
+                    addToCart(item.id, 1);
+                    e.preventDefault();
+                });
 
                 document.getElementById("smiler-product-main").appendChild(productCloneHtml);
             });
@@ -134,7 +141,7 @@ async function addToCart(id, qty) {
             "AddToCart?id=" + id + "&qty=" + qty
             );
 
-const popup = Notification();
+    const popup = Notification();
 
     if (response.ok) {
         const json = await response.json();
