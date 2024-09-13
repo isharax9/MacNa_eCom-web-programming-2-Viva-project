@@ -36,29 +36,26 @@ async function loadData() {
 
 function loadOption(prefix, dataList, property) {
     let options = document.getElementById(prefix + "-options");
-    let li = document.getElementById(prefix + "-li");
-    options.innerHTML = "";
+    options.innerHTML = ""; // Clear existing options
 
     dataList.forEach(data => {
-        let li_clone = li.cloneNode(true);
-
-        if (prefix === "color") {
-            // Display color name only
-            li_clone.querySelector("#" + prefix + "-a").innerHTML = data[property];
-            li_clone.style.borderColor = data[property]; // Optional: If you still want to keep a border color
-            li_clone.querySelector("#" + prefix + "-a").style.backgroundColor = ""; // Remove background color
-        } else {
-            li_clone.querySelector("#" + prefix + "-a").innerHTML = data[property];
-        }
-
-        options.appendChild(li_clone);
+        let link = document.createElement('a');
+        link.href = "#";
+        link.className = "dropdown-item";
+        link.innerHTML = (prefix === "color")
+            ? `<span class="color-swatch" style="background-color: ${data[property]}"></span> ${data[property]}`
+            : data[property];
+        options.appendChild(link);
     });
 
-    const all_li = document.querySelectorAll("#" + prefix + "-options li");
-    all_li.forEach(x => {
-        x.addEventListener('click', function () {
-            all_li.forEach(y => y.classList.remove('chosen'));
+    // Add event listener to handle selection
+    options.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function () {
+            // Remove 'chosen' class from all items
+            options.querySelectorAll('.dropdown-item').forEach(x => x.classList.remove('chosen'));
+            // Add 'chosen' class to clicked item
             this.classList.add('chosen');
         });
     });
 }
+
