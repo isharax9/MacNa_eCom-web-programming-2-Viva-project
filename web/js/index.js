@@ -83,3 +83,23 @@ async function checkSignIn() {
     });
     }
 }
+
+async function viewCart() {
+    const response = await fetch("cart.html");
+
+    if (response.ok) {
+        
+        const cartHtmlText = await response.text();
+
+        const parser = new DOMParser();
+        const cartHtml = parser.parseFromString(cartHtmlText, "text/html");
+
+        const cart_main = cartHtml.getElementById("cart-main");
+//        console.log(cart_main);
+
+        document.querySelector(".cart-page").innerHTML = cart_main.innerHTML;
+
+        loadCartItems();
+
+    }
+}
