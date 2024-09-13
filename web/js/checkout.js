@@ -217,6 +217,13 @@ async function checkout() {
             popup.success({
                 message: "Checkout Completed"
             });
+            
+            // Delay the redirection by 5 seconds (5000 milliseconds)
+        setTimeout(() => {
+            window.location = "index.html";
+        }, 5000);
+            
+            
         } else {
             popup.error({
                 message: json.message

@@ -92,55 +92,8 @@ public class Checkout extends HttpServlet {
                     Address address = (Address) criteria2.list().get(0);
 
                     //***Complete new address
-                    try {
-                        //Create Order in DB
-                        entity.Orders order = new entity.Orders();
-                        order.setAddress(address);
-                        order.setDate_time(new Date());
-                        order.setUser(user);
-                        session.save(order);
-
-                        // Get Cart Items
-                        Criteria criteria4 = session.createCriteria(Cart.class);
-                        criteria4.add(Restrictions.eq("user", user));
-                        List<Cart> cartList = criteria4.list();
-
-                        // Get Order Status (1.Paid) from DB
-                        Order_Status order_Status = (Order_Status) session.get(Order_Status.class, 1);
-
-                        // Create Order Item in DB
-                        for (Cart cartItem : cartList) {
-
-                            // Get Product
-                            Product product = cartItem.getProduct();
-
-                            Order_Item order_Item = new Order_Item();
-                            order_Item.setOrder(order);
-                            order_Item.setOrder_status(order_Status);
-                            order_Item.setProduct(product);
-                            order_Item.setQty(cartItem.getQty());
-                            session.save(order_Item);
-
-                            // Update Product Qty in DB
-                            product.setQty(product.getQty() - cartItem.getQty());
-                            session.update(product);
-
-                            // Delete Cart Item from DB
-                            session.delete(cartItem);
-
-                        }
-
-                        transaction.commit();
-                        
-                        responseJsonObject.addProperty("success", true);
-                        responseJsonObject.addProperty("message", "Checkout Completed");
-
-                    } catch (Exception e) {
-                        
-                        transaction.rollback();
-                        
-                    }
-
+                    
+                    saveOrders(session, transaction, user, address, responseJsonObject);
                 }
 
             } else {
@@ -208,8 +161,10 @@ public class Checkout extends HttpServlet {
                             // Save the address to the database
                             session.save(address);
 
-                            // Complete the checkout process
-                            // ...
+                            // ***Complete the checkout process
+                            
+                            saveOrders(session, transaction, user, address, responseJsonObject);
+                            
                         }
 
                     }
@@ -226,6 +181,57 @@ public class Checkout extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().write(gson.toJson(responseJsonObject));
 
+    }
+
+    private void saveOrders(Session session, Transaction transaction, User user, Address address, JsonObject responseJsonObject) {
+        try {
+            //Create Order in DB
+            entity.Orders order = new entity.Orders();
+            order.setAddress(address);
+            order.setDate_time(new Date());
+            order.setUser(user);
+            session.save(order);
+
+            // Get Cart Items
+            Criteria criteria4 = session.createCriteria(Cart.class);
+            criteria4.add(Restrictions.eq("user", user));
+            List<Cart> cartList = criteria4.list();
+
+            // Get Order Status (1.Paid) from DB
+            Order_Status order_Status = (Order_Status) session.get(Order_Status.class, 1);
+
+            // Create Order Item in DB
+            for (Cart cartItem : cartList) {
+
+                // Get Product
+                Product product = cartItem.getProduct();
+
+                Order_Item order_Item = new Order_Item();
+                order_Item.setOrder(order);
+                order_Item.setOrder_status(order_Status);
+                order_Item.setProduct(product);
+                order_Item.setQty(cartItem.getQty());
+                session.save(order_Item);
+
+                // Update Product Qty in DB
+                product.setQty(product.getQty() - cartItem.getQty());
+                session.update(product);
+
+                // Delete Cart Item from DB
+                session.delete(cartItem);
+
+            }
+
+            transaction.commit();
+
+            responseJsonObject.addProperty("success", true);
+            responseJsonObject.addProperty("message", "Checkout Completed");
+
+        } catch (Exception e) {
+
+            transaction.rollback();
+
+        }
     }
 
 }

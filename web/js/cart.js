@@ -77,3 +77,8 @@ async function loadCartItems() {
         });
     }
 }
+
+
+function checkoutbuttonclicked() {
+    window.location = "checkout.html"; // Redirect to checkout.html
+}
