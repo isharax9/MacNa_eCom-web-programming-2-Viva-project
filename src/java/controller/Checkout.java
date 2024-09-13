@@ -11,6 +11,7 @@ import entity.Order_Status;
 import entity.Product;
 import entity.User;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.HibernateUtil;
+import model.PayHere;
 import model.Validation;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -92,7 +94,6 @@ public class Checkout extends HttpServlet {
                     Address address = (Address) criteria2.list().get(0);
 
                     //***Complete new address
-                    
                     saveOrders(session, transaction, user, address, responseJsonObject);
                 }
 
@@ -162,9 +163,8 @@ public class Checkout extends HttpServlet {
                             session.save(address);
 
                             // ***Complete the checkout process
-                            
                             saveOrders(session, transaction, user, address, responseJsonObject);
-                            
+
                         }
 
                     }
@@ -190,18 +190,34 @@ public class Checkout extends HttpServlet {
             order.setAddress(address);
             order.setDate_time(new Date());
             order.setUser(user);
-            session.save(order);
+            int order_id = (int) session.save(order);
 
             // Get Cart Items
             Criteria criteria4 = session.createCriteria(Cart.class);
             criteria4.add(Restrictions.eq("user", user));
             List<Cart> cartList = criteria4.list();
 
-            // Get Order Status (1.Paid) from DB
-            Order_Status order_Status = (Order_Status) session.get(Order_Status.class, 1);
+            // Get Order Status (1.Paid) from DB ( 5.Payment pending)
+            Order_Status order_Status = (Order_Status) session.get(Order_Status.class, 5);
 
             // Create Order Item in DB
+            double amount = 0;
+            String items = "";
             for (Cart cartItem : cartList) {
+
+                //Calculate amount start
+                amount += cartItem.getQty() * cartItem.getProduct().getPrice();
+
+                if (address.getCity().getId() == 1) {
+                    amount += 500;
+                } else {
+                    amount += 1000;
+                }
+                //Calculate amount end
+
+                //Get Item Details
+                items += cartItem.getProduct().getTitle() + " x " + cartItem.getQty() + " ";
+                //Get Item Details
 
                 // Get Product
                 Product product = cartItem.getProduct();
@@ -224,8 +240,51 @@ public class Checkout extends HttpServlet {
 
             transaction.commit();
 
+            //Start: Set Payment Data
+            String merchant_id = "1227480";
+            String formatedAmount = new DecimalFormat("0.00").format(amount);
+
+            String currency = "LKR";
+            String merchantSecret = "MjkyMTc2NDIyNTE5NjA5NTIyNzMzMTIwNTM4NzY0NjQ3OTU4OTk0";
+
+            String merchantSecretMd5Hash = PayHere.generateMD5(merchantSecret);
+
+            JsonObject payhere = new JsonObject();
+            payhere.addProperty("merchant_id", merchant_id);
+
+            payhere.addProperty("return_url", "");
+            payhere.addProperty("cancel_url", "");
+
+            payhere.addProperty("notify_url", ""); //***
+
+            payhere.addProperty("first_name", user.getFirst_name());
+            payhere.addProperty("last_name", user.getLast_name());
+
+            payhere.addProperty("email", user.getEmail());
+            payhere.addProperty("phone", "0710351156");
+            payhere.addProperty("address", "No.200/3, Kurunegala");
+
+            payhere.addProperty("city", "Kurunegala");
+            payhere.addProperty("country", "Sri Lanka");
+
+            payhere.addProperty("order_id", String.valueOf(order_id));
+            payhere.addProperty("items", items);
+
+            payhere.addProperty("currency", currency);
+            payhere.addProperty("amount", formatedAmount);
+            payhere.addProperty("sandbox", true);
+
+//Generate MD5 Hash
+//merahantID + orderID + amount Formatted + currency + m + merchantSecretMd5Hash
+            String md5Hash = PayHere.generateMD5(merchant_id + order_id + formatedAmount + currency + merchantSecretMd5Hash);
+            payhere.addProperty("hash", md5Hash);
+
+//End: Set Payment Data
             responseJsonObject.addProperty("success", true);
             responseJsonObject.addProperty("message", "Checkout Completed");
+            
+            Gson gson = new Gson();
+            responseJsonObject.add("payhereJson", gson.toJsonTree(payhere));
 
         } catch (Exception e) {
 

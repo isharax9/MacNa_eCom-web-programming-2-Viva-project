@@ -1,3 +1,30 @@
+
+payhere.onCompleted = function onCompleted(orderId) {
+    console.log("Payment completed. OrderID:" + orderId);
+
+    const popup = new Notification();
+    popup.success({
+        message: "Order Placed. Thank You"
+    });
+
+    // Delay the redirection by 5 seconds (5000 milliseconds)
+    setTimeout(() => {
+        window.location = "index.html";
+    }, 5000);
+
+};
+
+payhere.onDismissed = function onDismissed() {
+    console.log("Payment dismissed");
+};
+
+payhere.onError = function onError(error) {
+    console.log("Error:" + error);
+};
+
+
+
+
 async function loadData() {
 
     const response = await fetch(
@@ -208,22 +235,23 @@ async function checkout() {
             }
     );
 
-    const popup = new Notification();
+
 
     if (response.ok) {
         const json = await response.json();
 
         if (json.success) {
-            popup.success({
-                message: "Checkout Completed"
-            });
-            
-            // Delay the redirection by 5 seconds (5000 milliseconds)
-        setTimeout(() => {
-            window.location = "index.html";
-        }, 5000);
-            
-            
+
+
+            //Start PayHere Payment
+            console.log(json.payhereJson);
+
+            payhere.startPayment(json.payhereJson);
+
+
+
+
+
         } else {
             popup.error({
                 message: json.message
