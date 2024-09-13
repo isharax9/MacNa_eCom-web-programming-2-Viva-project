@@ -1,17 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
     <head>
         <meta charset="utf-8">
-        <title>MacNa</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="eCommerce HTML Template Free Download" name="keywords">
-        <meta content="eCommerce HTML Template Free Download" name="description">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Smart Trade</title>
+        <meta name="robots" content="noindex, follow" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
 
+        <!-- CSS
+        ============================================ -->
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
+        <link rel="stylesheet" href="assets/css/vendor/flaticon/flaticon.css">
+        <link rel="stylesheet" href="assets/css/vendor/slick.css">
+        <link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
+        <link rel="stylesheet" href="assets/css/vendor/jquery-ui.min.css">
+        <link rel="stylesheet" href="assets/css/vendor/sal.css">
+        <link rel="stylesheet" href="assets/css/vendor/magnific-popup.css">
+        <link rel="stylesheet" href="assets/css/vendor/base.css">
+        <link rel="stylesheet" href="assets/css/style.min.css">
+        <link rel="stylesheet" href="assets/css/notification.css">
+        
+        
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
 
         <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+        
 
         <!-- CSS Libraries -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -21,11 +42,17 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/notification.css" rel="stylesheet">
+        
+
     </head>
 
-    <body onload="loadData()">
-        <!-- Top bar Start -->
+
+    <body class="sticky-header" onload="loadData()">
+        <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+        <a href="#top" class="back-to-top" id="backto-top"><i class="fal fa-arrow-up"></i></a>
+       <!-- Top bar Start -->
         <div class="top-bar">
             <div class="container-fluid">
                 <div class="row">
@@ -129,182 +156,144 @@
         </div>
         <!-- Breadcrumb End -->
 
-        <!-- Product List Start -->
-        <div class="product-view">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="product-view-top">
-                                    <div class="row">
+        <main class="main-wrapper">
 
-                                        <div class="col-md-3">
-                                            <div class="product-short">
-                                                <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">Category</div>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <ul id="category-options">
-                                                            <!--<li class="current-cat"><a href="#">Apple</a></li>-->
-                                                            <li id="category-li"><a id="category-a" href="#">Apple</a></li>
 
-                                                        </ul>
-                                                    </div>
-                                                </div>
+            <!-- Start Shop Area  -->
+            <div class="axil-shop-area axil-section-gap bg-color-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="axil-shop-sidebar">
+                                <div class="d-lg-none">
+                                    <button class="sidebar-close filter-close-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="toggle-list product-categories active">
+                                    <h6 class="title">CATEGORY</h6>
+                                    <div class="shop-submenu">
+                                        <ul id="category-options">
+                                            <!--<li class="current-cat"><a href="#">Apple</a></li>-->
+                                            <li id="category-li"><a id="category-a">Apple</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="toggle-list product-categories product-gender active">
+                                    <h6 class="title">CONDITION</h6>
+                                    <div class="shop-submenu">
+                                        <ul id="condition-options">
+                                            <!--<li class="chosen"><a href="#">New</a></li>-->
+                                            <li id="condition-li"><a id="condition-a">New</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="toggle-list product-color active">
+                                    <h6 class="title">COLOR</h6>
+                                    <div class="shop-submenu">
+                                        <ul id="color-options">
+                                            <!--<li class="chosen" style="border-color: red;"><a style="background: red;" href="#" class="color-extra-02"></a></li>-->
+                                            <li id="color-li" style="border-color: red;"><a id="color-a" style="background: red;" class="color-extra-02"></a></li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="toggle-list product-size active">
+                                    <h6 class="title">STORAGE</h6>
+                                    <div class="shop-submenu">
+                                        <ul id="storage-options">
+                                            <!--<li class="chosen"><a href="#">128 GB</a></li>-->
+                                            <li id="storage-li"><a id="storage-a">128 GB</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="toggle-list product-price-range active">
+                                    <h6 class="title">PRICE</h6>
+                                    <div class="shop-submenu">
+                                        <form action="#" class="mt--25">
+                                            <div id="slider-range"></div>
+                                            <div class="flex-center mt--20">
+                                                <input type="text" id="amount" class="amount-range" readonly>
                                             </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button class="axil-btn btn-bg-secondary" onclick="searchProducts(0);">Apply</button>
+                                <button class="axil-btn btn-bg-primary mt--10" onclick="location.reload()">Reset All</button>
+                            </div>
+                            <!-- End .axil-shop-sidebar -->
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="axil-shop-top mb--40">
+                                        <div class="category-select align-items-center justify-content-lg-end justify-content-between">
+                                            <!-- Start Single Select  -->
+                                            <span class="filter-results">Showing 1-10 of 20 results</span>
+                                            <select class="single-select" id="st-sort">
+                                                <option>Sort by Latest</option>
+                                                <option>Sort by Oldest</option>
+                                                <option>Sort by Name</option>
+                                                <option>Sort by Price</option>
+                                            </select>
+                                            <!-- End Single Select  -->
                                         </div>
-
-                                        <div class="col-md-2">
-                                            <div class="product-short">
-                                                <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">Condition</div>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <ul id="condition-options">
-                                                            <!--<li class="chosen"><a href="#">New</a></li>-->
-                                                            <li id="condition-li"><a id="condition-a" href="#">New</a></li>
-
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="product-short">
-                                                <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">Color</div>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <ul id="color-options">
-                                                            <li id="color-li">
-                                                                <a id="color-a" href="#">
-                                                                    <span class="color-swatch"></span>
-                                                                    <span class="color-name">Red</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-2">
-                                            <div class="product-short">
-                                                <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">Storage</div>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <ul id="storage-options">
-                                                            <li id="storage-li"><a id="storage-a" href="#">128 GB</a></li>
-
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-3">
-                                            <div class="product-price-range">
-                                                <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">price range</div>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item">$0 to $50</a>
-                                                        <a href="#" class="dropdown-item">$51 to $100</a>
-                                                        <a href="#" class="dropdown-item">$101 to $150</a>
-                                                        <a href="#" class="dropdown-item">$151 to $200</a>
-                                                        <a href="#" class="dropdown-item">$201 to $250</a>
-                                                        <a href="#" class="dropdown-item">$251 to $300</a>
-                                                        <a href="#" class="dropdown-item">$301 to $350</a>
-                                                        <a href="#" class="dropdown-item">$351 to $400</a>
-                                                        <a href="#" class="dropdown-item">$401 to $450</a>
-                                                        <a href="#" class="dropdown-item">$451 to $500</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="d-lg-none">
+                                            <button class="product-filter-mobile filter-toggle"><i class="fas fa-filter"></i> FILTER</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End .row -->
 
+                            <div class="row row--15" id="st-product-container">
 
+                                <div class="col-xl-4 col-sm-6" id="st-product">
+                                    <div class="axil-product product-style-one mb--30">
+                                        <div class="thumbnail">
+                                            <a href="single-product.html" id="st-product-a-1">
+                                                <img src="assets/images/product/product-01.png" alt="Product Images" id="st-product-img-1">
+                                            </a>
 
-                        </div>
-                        <div class="col-md-4" id="st-product-container">
-                            <div class="product-item" id="st-product">
-                                <div class="product-title">
-                                    <a href="#" id="st-product-title-1">Product Name</a>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                                            <div class="product-hover-action">
+                                                <ul class="cart-action">
+                                                    <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
+                                                    <li class="select-option"><a href="#">Add to Cart</a></li>
+                                                    <li class="quickview"><a href="#" id="st-product-a-2"><i class="far fa-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <div class="inner">
+                                                <h5 class="title"><a href="#" id="st-product-title-1">Apple iPhone 15 Pro</a></h5>
+                                                <div class="product-price-variant">
+                                                    <span class="price current-price">Rs. <span id="st-product-price-1">350,000.00</span></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-image">
-                                    <a href="product-detail.html"  id="st-product-a-1">
-                                        <img src="img/product-1.jpg" id="st-product-img-1" alt="Product Image">
-                                    </a>
-                                    <div class="product-action">
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-search" id="st-product-a-2"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-price">
-                                    <h3><span>Rs.<span id="st-product-price-1">350,000.00</span></span></h3>
-                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                                </div>
+                                <!-- End Single Product  -->
+
+                            </div>
+                            <div class="text-center pt--20" id="st-pagination-container">
+                                <a href="#" class="axil-btn btn-bg-primary" id="st-pagination-button">Prev</a>
                             </div>
                         </div>
-                        <!-- Pagination Start -->
-                        <div class="col-md-12">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- Pagination Start -->
-                    </div>           
-
-                    <!-- Side Bar Start -->
-                    <div class="col-lg-4 sidebar">
-
-
-                        <!--************for search panel***************-->  
-
-
                     </div>
-                    <!-- Side Bar End -->
                 </div>
+                <!-- End .container -->
             </div>
-        </div>
-        <!-- Product List End -->  
+            <!-- End Shop Area  -->
 
-        <!-- Brand Start -->
-        <div class="brand">
-            <div class="container-fluid">
-                <div class="brand-slider">
-                    <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
-                </div>
-            </div>
-        </div>
-        <!-- Brand End -->
 
+        </main>
+        
+        
+        
+        
         <!-- Footer Start -->
         <div class="footer">
             <div class="container-fluid">
@@ -395,18 +384,59 @@
         </div>
         <!-- Footer Bottom End -->       
 
-        <!-- Back to Top -->
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/slick/slick.min.js"></script>
+        <!-- JS
+    ============================================ -->
+        <!-- Modernizer JS -->
+        <script src="assets/js/vendor/modernizr.min.js"></script>
+        <!-- jQuery JS -->
+        <script src="assets/js/vendor/jquery.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="assets/js/vendor/popper.min.js"></script>
+        <script src="assets/js/vendor/bootstrap.min.js"></script>
+        <script src="assets/js/vendor/slick.min.js"></script>
+        <script src="assets/js/vendor/js.cookie.js"></script>
+        <!-- <script src="assets/js/vendor/jquery.style.switcher.js"></script> -->
+        <script src="assets/js/vendor/jquery-ui.min.js"></script>
+        <script src="assets/js/vendor/jquery.ui.touch-punch.min.js"></script>
+        <script src="assets/js/vendor/jquery.countdown.min.js"></script>
+        <script src="assets/js/vendor/sal.js"></script>
+        <script src="assets/js/vendor/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/vendor/imagesloaded.pkgd.min.js"></script>
+        <script src="assets/js/vendor/isotope.pkgd.min.js"></script>
+        <script src="assets/js/vendor/counterup.js"></script>
+        <script src="assets/js/vendor/waypoints.min.js"></script>
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <!-- Main JS -->
+        <script src="assets/js/main.js"></script>
+
         <script src="js/search.js"></script>
         <script src="js/notification.js"></script>
+
+        <script>
+
+
+
+
+        const colorOptions = document.querySelectorAll('#color-options li');
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                colorOptions.forEach(opt => opt.classList.remove('chosen'));
+                this.classList.add('chosen');
+            });
+        });
+
+        const storageOptions = document.querySelectorAll('#storage-options li');
+        storageOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                storageOptions.forEach(opt => opt.classList.remove('chosen'));
+                this.classList.add('chosen');
+            });
+        });
+        </script>
+
     </body>
+
 </html>
