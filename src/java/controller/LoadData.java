@@ -59,13 +59,14 @@ public class LoadData extends HttpServlet {
 
         // Get latest Products
         criteria5.addOrder(Order.desc("id"));
-        jsonObject.addProperty("allproductCount", criteria5.list().size());
+        jsonObject.addProperty("allProductCount", criteria5.list().size());
 
         // Set Product Range
-        criteria5.setFirstResult(1);
-        criteria5.setMaxResults(6);
+        criteria5.setFirstResult(0);
+        criteria5.setMaxResults(9);
 
         List<Product> productList = criteria5.list();
+        System.out.println(productList.size());
 
         //Removing user's from product json object
         for (Product product : productList) {
