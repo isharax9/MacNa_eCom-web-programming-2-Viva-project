@@ -255,7 +255,7 @@ public class Checkout extends HttpServlet {
             payhere.addProperty("return_url", "");
             payhere.addProperty("cancel_url", "");
 
-            payhere.addProperty("notify_url", ""); //***
+            payhere.addProperty("notify_url", "VerifyPayments"); //***
 
             payhere.addProperty("first_name", user.getFirst_name());
             payhere.addProperty("last_name", user.getLast_name());
