@@ -1,5 +1,4 @@
 async function loadData() {
-    const popup = Notification();
 
     const response = await fetch(
             "LoadCheckout"
@@ -158,12 +157,74 @@ async function loadData() {
 
                 st_tbody.appendChild(st_order_total_tr);
             });
-            
+
             //"Select" is the default valuve for shipping charge is 5,000/=
             city.dispatchEvent(new Event("change"));
 
         } else {
             window.location = "sign-in.html";
         }
+    }
+}
+
+async function checkout() {
+    let isCurrentAddress = document.getElementById("checkbox1").checked;
+
+    //getting address data
+    let first_name = document.getElementById("first-name");
+    let last_name = document.getElementById("last-name");
+    let city = document.getElementById("city");
+    let address1 = document.getElementById("address1");
+    let address2 = document.getElementById("address2");
+    let postal_code = document.getElementById("postal-code");
+    let mobile = document.getElementById("mobile");
+
+    //request data(json)
+    const data = {
+
+        isCurrentAddress: isCurrentAddress,
+        first_name: first_name.value,
+        last_name: last_name.value,
+
+        city_id: city.value,
+        address1: address1.value,
+
+        address2: address2.value,
+        postal_code: postal_code.value,
+        mobile: mobile.value
+
+    };
+
+
+
+    const response = await fetch(
+            "Checkout",
+            {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+    );
+
+    const popup = new Notification();
+
+    if (response.ok) {
+        const json = await response.json();
+
+        if (json.success) {
+            popup.success({
+                message: "Checkout Completed"
+            });
+        } else {
+            popup.error({
+                message: json.message
+            });
+        }
+    } else {
+        popup.error({
+            message: "Try again later!"
+        });
     }
 }

@@ -19,4 +19,9 @@ public class Validation {
     public static boolean isInteger(String text) {
         return text.matches("^\\d+$");
     }
+    
+    public static boolean isMobileNumberValid(String mobile) {
+        return mobile.matches("^07[01245678]{1}[0-9]{7}$");
+    }
+
 }
