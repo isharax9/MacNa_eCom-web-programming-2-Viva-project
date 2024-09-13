@@ -21,9 +21,10 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/notification.css" rel="stylesheet">
     </head>
 
-    <body>
+    <body onload="loadData()">
         <!-- Top bar Start -->
         <div class="top-bar">
             <div class="container-fluid">
@@ -40,7 +41,7 @@
             </div>
         </div>
         <!-- Top bar End -->
-        
+
         <!-- Nav Bar Start -->
         <div class="nav">
             <div class="container-fluid">
@@ -81,7 +82,7 @@
             </div>
         </div>
         <!-- Nav Bar End -->      
-        
+
         <!-- Bottom Bar Start -->
         <div class="bottom-bar">
             <div class="container-fluid">
@@ -115,7 +116,7 @@
             </div>
         </div>
         <!-- Bottom Bar End --> 
-        
+
         <!-- Breadcrumb Start -->
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
@@ -127,7 +128,7 @@
             </div>
         </div>
         <!-- Breadcrumb End -->
-        
+
         <!-- Checkout Start -->
         <div class="checkout">
             <div class="container-fluid"> 
@@ -136,129 +137,109 @@
                         <div class="checkout-inner">
                             <div class="billing-address">
                                 <h2>Billing Address</h2>
+                                <div class="">
+                                    <input type="checkbox" id="checkbox1">
+                                    <label for="checkbox1">Same As Your Existing Address?</label>
+                                </div>
+                                <br/>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>First Name*</label>
-                                        <input class="form-control" type="text" placeholder="First Name">
+                                        <input class="form-control" id="first-name" type="text" placeholder="First Name">
                                     </div>
                                     <div class="col-md-6">
                                         <label>Last Name*</label>
-                                        <input class="form-control" type="text" placeholder="Last Name">
+                                        <input class="form-control" id="last-name" type="text" placeholder="Last Name">
                                     </div>
                                     <div class="col-md-6">
-                                        <label>City</label>
-                                        <select class="custom-select">
-                                            <option selected>United States</option>
-                                            <option>Afghanistan</option>
-                                            <option>Albania</option>
-                                            <option>Algeria</option>
+                                        <label>City*</label>
+                                        <select class="custom-select" id="city">
+                                            <option value="0">Select</option>
+
                                         </select>
                                     </div>
                                     <div class="col-md-6">
-                                        <label>Mobile No</label>
-                                        <input class="form-control" type="text" placeholder="Mobile No">
+                                        <label>Mobile No*</label>
+                                        <input class="form-control" id="mobile" type="text" placeholder="Mobile No">
                                     </div>
                                     <div class="col-md-6">
-                                        <label>Address line1</label>
-                                        <input class="form-control" type="text" placeholder="Address">
+                                        <label>Address line1*</label>
+                                        <input class="form-control" id="address1" type="text" placeholder="Address line 1">
                                     </div>
-                                    
-                                    
+
+
                                     <div class="col-md-6">
-                                        <label>Address line2</label>
-                                        <input class="form-control" type="text" placeholder="State">
+                                        <label>Address line2*</label>
+                                        <input class="form-control" id="address2" type="text" placeholder="Address line 2">
                                     </div>
                                     <div class="col-md-6">
-                                        <label>ZIP Code</label>
-                                        <input class="form-control" type="text" placeholder="ZIP Code">
+                                        <label>ZIP Code*</label>
+                                        <input class="form-control" id="postal-code" type="text" placeholder="ZIP Code">
                                     </div>
-                                    
+
                                 </div>
                             </div>
-
-                            
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="checkout-inner">
-                            <div class="checkout-summary">
-                                <h1>Cart Total</h1>
-                                <p>Product Name<span>$99</span></p>
-                                <p class="sub-total">Sub Total<span>$99</span></p>
-                                <p class="ship-cost">Shipping Cost<span>$1</span></p>
-                                <h2>Grand Total<span>$100</span></h2>
-                            </div>
-
-                            <div class="checkout-payment">
-                                <div class="payment-methods">
-                                    <h1>Payment Methods</h1>
-                                    <div class="payment-method">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="payment-1" name="payment">
-                                            <label class="custom-control-label" for="payment-1">Card</label>
-                                        </div>
-                                        <div class="payment-content" id="payment-1-show">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam.
-                                            </p>
-                                        </div>
+                        <div class="checkout-payment">
+                            <div class="payment-methods">
+                                <h1>Your Order</h1>
+                                <div class="summery-table-wrap">
+                                    <table class="table summery-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="st-tbody">
+                                            <tr class="order-product" id="st-item-tr">
+                                                <td><span id="st-item-title">Product-1</span> x<span id="st-item-qty" class="quantity">1</span></td>
+                                                <td> Rs.<span id="st-item-subtotal">100,000.00</span></td>
+                                            </tr>
+                                            <tr class="order-subtotal" id="st-order-subtotal-tr">
+                                                <td>Sub Total (TAX Included)</td>
+                                                <td>Rs.<span id="st-subtotal"> 250,000.00</span></td>
+                                            </tr>
+                                            <tr class="order-shipping" id="st-order-shipping-tr">
+                                               
+                                                    
+                                                <td><span class="title">Shipping Charges</span></td>
+                                                <td><span class="amount">Rs. <span id="st-shipping-amount">1,000.00</span></span></td>
+                                                    
+                                                
+                                            </tr>
+                                            <tr class="order-total" id="st-order-total-tr">
+                                                <td>Grand Total</td>
+                                                <td class="order-total-amount">Rs.<span id="st-total">251,000.00</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h1>Payment Methods</h1>
+                                <div class="payment-method">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="payment-1" name="payment" checked>
+                                        <label class="custom-control-label" for="payment-1">Visa/Master Card</label>
                                     </div>
-                                    <!-- <div class="payment-method">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="payment-2" name="payment">
-                                            <label class="custom-control-label" for="payment-2">Payoneer</label>
-                                        </div>
-                                        <div class="payment-content" id="payment-2-show">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam.
-                                            </p>
-                                        </div>
+                                    <div> 
+                                        <img src="./img/payment-method.png" alt="Visa">                                        
                                     </div>
-                                    <div class="payment-method">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="payment-3" name="payment">
-                                            <label class="custom-control-label" for="payment-3">Check Payment</label>
-                                        </div>
-                                        <div class="payment-content" id="payment-3-show">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="payment-method">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="payment-4" name="payment">
-                                            <label class="custom-control-label" for="payment-4">Direct Bank Transfer</label>
-                                        </div>
-                                        <div class="payment-content" id="payment-4-show">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="payment-method">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="payment-5" name="payment">
-                                            <label class="custom-control-label" for="payment-5">Cash on Delivery</label>
-                                        </div>
-                                        <div class="payment-content" id="payment-5-show">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam.
-                                            </p>
-                                        </div>
-                                    </div> -->
+                                    </br>
                                 </div>
                                 <div class="checkout-btn">
-                                    <button>Place Order</button>
+                                    <button type="submit" class="axil-btn btn-bg-primary checkout-btn">Checkout</button>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
         <!-- Checkout End -->
-        
+
         <!-- Footer Start -->
         <div class="footer">
             <div class="container-fluid">
@@ -273,7 +254,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
                             <h2>Follow Us</h2>
@@ -311,7 +292,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row payment align-items-center">
                     <div class="col-md-6">
                         <div class="payment-method">
@@ -331,7 +312,7 @@
             </div>
         </div>
         <!-- Footer End -->
-        
+
         <!-- Footer Bottom Start -->
         <div class="footer-bottom">
             <div class="container">
@@ -341,24 +322,26 @@
                     </div>
 
                     <div class="col-md-6 template-by">
-						<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
                         <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Footer Bottom End -->     
-        
+
         <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-        
+
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/slick/slick.min.js"></script>
-        
+
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/checkout.js"></script>
+        <script src="js/notification.js"></script>
     </body>
 </html>
