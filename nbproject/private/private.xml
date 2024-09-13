@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/netbeans16/macna_ee7/web/js/single-product.js</file>
-            <file>file:/C:/netbeans16/macna_ee7/web/single-product.html</file>
-            <file>file:/C:/netbeans16/macna_ee7/src/java/controller/AddToCart.java</file>
-            <file>file:/C:/netbeans16/macna_ee7/src/java/hibernate.cfg.xml</file>
-            <file>file:/C:/netbeans16/macna_ee7/src/java/dto/Cart_DTO.java</file>
-            <file>file:/C:/netbeans16/macna_ee7/src/java/entity/Cart.java</file>
+            <file>file:/C:/netbeans16/macna_ee7/web/index.html</file>
+            <file>file:/C:/netbeans16/macna_ee7/src/java/controller/CheckSignIn.java</file>
+            <file>file:/C:/netbeans16/macna_ee7/web/js/index.js</file>
         </group>
     </open-files>
 </project-private>
