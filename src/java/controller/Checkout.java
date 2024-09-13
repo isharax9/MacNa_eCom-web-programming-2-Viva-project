@@ -4,9 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dto.User_DTO;
 import entity.Address;
+import entity.Cart;
 import entity.City;
+import entity.Order_Item;
+import entity.Order_Status;
+import entity.Product;
 import entity.User;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -86,6 +92,55 @@ public class Checkout extends HttpServlet {
                     Address address = (Address) criteria2.list().get(0);
 
                     //***Complete new address
+                    try {
+                        //Create Order in DB
+                        entity.Orders order = new entity.Orders();
+                        order.setAddress(address);
+                        order.setDate_time(new Date());
+                        order.setUser(user);
+                        session.save(order);
+
+                        // Get Cart Items
+                        Criteria criteria4 = session.createCriteria(Cart.class);
+                        criteria4.add(Restrictions.eq("user", user));
+                        List<Cart> cartList = criteria4.list();
+
+                        // Get Order Status (1.Paid) from DB
+                        Order_Status order_Status = (Order_Status) session.get(Order_Status.class, 1);
+
+                        // Create Order Item in DB
+                        for (Cart cartItem : cartList) {
+
+                            // Get Product
+                            Product product = cartItem.getProduct();
+
+                            Order_Item order_Item = new Order_Item();
+                            order_Item.setOrder(order);
+                            order_Item.setOrder_status(order_Status);
+                            order_Item.setProduct(product);
+                            order_Item.setQty(cartItem.getQty());
+                            session.save(order_Item);
+
+                            // Update Product Qty in DB
+                            product.setQty(product.getQty() - cartItem.getQty());
+                            session.update(product);
+
+                            // Delete Cart Item from DB
+                            session.delete(cartItem);
+
+                        }
+
+                        transaction.commit();
+                        
+                        responseJsonObject.addProperty("success", true);
+                        responseJsonObject.addProperty("message", "Checkout Completed");
+
+                    } catch (Exception e) {
+                        
+                        transaction.rollback();
+                        
+                    }
+
                 }
 
             } else {
@@ -116,25 +171,25 @@ public class Checkout extends HttpServlet {
 
                         if (address1.isEmpty()) {
                             responseJsonObject.addProperty("message", "Please fill Address Line 1");
-                            
-                        }else if(address2.isEmpty()) {
+
+                        } else if (address2.isEmpty()) {
                             responseJsonObject.addProperty("message", "Please fill Address Line 2");
-                            
+
                         } else if (postal_code.isEmpty()) {
                             responseJsonObject.addProperty("message", "Please fill Postal Code");
-                            
+
                         } else if (postal_code.length() != 5) {
                             responseJsonObject.addProperty("message", "Invalid Postal Code postal code should be less than 5 digits");
-                            
+
                         } else if (!Validation.isInteger(postal_code)) {
                             responseJsonObject.addProperty("message", "Invalid Postal Code");
-                            
+
                         } else if (mobile.isEmpty()) {
                             responseJsonObject.addProperty("message", "Please fill Mobile Number");
-                            
+
                         } else if (!Validation.isMobileNumberValid(mobile)) {
                             responseJsonObject.addProperty("message", "Invalid Mobile Number");
-                            
+
                         } else {
 
                             // Create a new address object
@@ -167,7 +222,7 @@ public class Checkout extends HttpServlet {
             // User not signed in
             responseJsonObject.addProperty("message", "User not signed in");
         }
-        
+
         response.setContentType("application/json");
         response.getWriter().write(gson.toJson(responseJsonObject));
 
