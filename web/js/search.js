@@ -45,7 +45,6 @@ async function loadData() {
             st_product_clone.querySelector("#st-product-a-1").href = "single-product.html?id=" + product.id;
             
             st_product_clone.querySelector("#st-product-img-1").src = "product-images/" + product.id + "/image1.png";
-            st_product_clone.querySelector("#st-product-a-2").href = "single-product.html?id=" + product.id;
             
             st_product_clone.querySelector("#st-product-title-1").innerHTML = product.title;
             st_product_clone.querySelector("#st-product-price-1").innerHTML = new Intl.NumberFormat(
@@ -271,7 +270,7 @@ function updateProductView(json) {
         st_product_clone.querySelector("#st-product-a-1").href = "single-product.html?id=" + product.id;
         
         st_product_clone.querySelector("#st-product-img-1").src = "product-images/" + product.id + "/image1.png";
-        st_product_clone.querySelector("#st-product-a-2").href = "single-product.html?id=" + product.id;
+
         
         st_product_clone.querySelector("#st-product-title-1").innerHTML = product.title;
         st_product_clone.querySelector("#st-product-price-1").innerHTML = new Intl.NumberFormat(
